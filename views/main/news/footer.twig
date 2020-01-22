@@ -1,0 +1,19 @@
+{% import 'macros.twig' as gm %}
+
+<div class="panel-footer">
+	<div class="glyphicon-block" title="Дата публикации">
+		<i class="far fa-clock"></i>
+		{% if item.published %}
+			{{ item.published_ui|raw }}
+		{% else %}
+			Не опубликовано!
+		{% endif %}
+	</div>
+	{% if item.author %}
+    	<div class="glyphicon-block" title="Автор">
+    		<i class="fas fa-user-circle"></i>
+    		<b>{{ item.author.name }}</b>
+    	</div>
+	{% endif %}
+    {% include 'components/tags.twig' with { 'tags': item.tags } %}
+</div>

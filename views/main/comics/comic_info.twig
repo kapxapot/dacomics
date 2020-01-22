@@ -1,0 +1,13 @@
+{% if comic.issued_ui or comic.translators or comic.designers %}
+    <div class="mb-2">
+		{% if comic.issued_ui %}
+  			<p><b>Дата выхода:</b> {{ comic.issued_ui|raw }}</p>
+		{% endif %}
+		{% if comic.translators %}
+  			<p><b>Перевод:</b> {{ comic.translators }}</p>
+		{% endif %}
+		{% if comic.designers %}
+  			<p><b>Оформление:</b> {{ comic.designers }}</p>
+		{% endif %}
+    </div>
+{% endif %}

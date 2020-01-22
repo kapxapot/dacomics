@@ -1,0 +1,260 @@
+auth_tokens:
+  table: auth_tokens
+  private:
+    - id
+    - user_id
+    - token
+    - expires_at
+
+comic_issues:
+  table: comic_issues
+  api: full
+  name_field: number
+  sort: number
+  public:
+    - id
+    - series_id
+    - number
+    - issued_on
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - description
+    - origin
+    - name_ru
+    - name_en
+    - tags
+    - download_link
+    - download_original_link
+    - buy_link
+    - translators
+    - designers
+  private:
+    - published
+    - published_at
+
+comic_pages:
+  table: comic_pages
+  api: full
+  name_field: number
+  sort: number
+  public:
+    - id
+    - comic_issue_id
+    - number
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - published
+    - type
+
+comic_publishers:
+  table: comic_publishers
+  api: full
+  name_field: name
+  sort: name
+  default: 1
+  public:
+    - id
+    - name
+    - website
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+
+comic_series:
+  table: comic_series
+  api: full
+  name_field: name_ru
+  sort: created_at
+  reverse: true
+  public:
+    - id
+    - game_id
+    - name_ru
+    - name_en
+    - alias
+    - publisher_id
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - description
+    - tags
+  private:
+    - published
+    - published_at
+
+comic_standalones:
+  table: comic_standalones
+  api: full
+  name_field: name_ru
+  sort: created_at
+  reverse: true
+  public:
+    - id
+    - name_ru
+    - name_en
+    - game_id
+    - alias
+    - publisher_id
+    - issued_on
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - description
+    - origin
+    - tags
+    - download_link
+    - download_original_link
+    - buy_link
+    - translators
+    - designers
+  private:
+    - published
+    - published_at
+
+comic_standalone_pages:
+  table: comic_pages
+  api: full
+  name_field: number
+  sort: number
+  public:
+    - id
+    - comic_standalone_id
+    - number
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - published
+    - type
+
+games:
+  table: games
+  api: full
+  name_field: name
+  sort: name
+  default: 1
+  public:
+    - id
+    - name
+  private:
+    - alias
+    - published
+    - autotags
+
+links:
+  table: links
+  api: full
+  name_field: url
+  sort: created_at
+  reverse: true
+  private:
+    - id
+    - url
+    - image_url
+    - description
+    - created_at
+    - updated_at
+
+menus:
+  table: menus
+  api: full
+  name_field: text
+  sort: created_at
+  reverse: true
+  private:
+    - id
+    - link
+    - text
+    - position
+    - created_at
+    - updated_at
+
+menu_items:
+  table: menu_items
+  api: full
+  name_field: text
+  sort: text
+  private:
+    - id
+    - menu_id
+    - link
+    - text
+    - position
+    - created_at
+    - updated_at
+
+news:
+  table: news
+  api: full
+  name_field: title
+  sort: created_at
+  reverse: true
+  public:
+    - id
+    - game_id
+    - title
+    - text
+    - tags
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+  private:
+    - published
+    - published_at
+
+roles:
+  table: roles
+  api: full
+  name_field: name
+  sort: name
+  public:
+    - id
+    - name
+    - tag
+
+strips:
+  table: strips
+  api: full
+  name_field: title
+  sort: id
+  reverse: true
+  public:
+    - id
+    - game_id
+    - title
+    - created_at
+    - created_by
+    - updated_at
+    - updated_by
+    - type
+    - tags
+  private:
+    - published
+    - published_at
+
+tags:
+  table: tags
+
+users:
+  table: users
+  api: full
+  name_field: login
+  sort: created_at
+  reverse: true
+  public:
+    - id
+    - login
+    - name
+    - role_id
+    - created_at
+    - updated_at
+  private:
+    - email

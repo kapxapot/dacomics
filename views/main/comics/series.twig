@@ -1,0 +1,32 @@
+{% extends 'main/layout.twig' %}
+
+{% import 'main/macros.twig' as m %}
+{% import 'main/local_macros.twig' as lm %}
+
+{% block content %}
+	<div class="panel panel-primary">
+		{{ lm.panel_header(_context, series.name_ru, {
+			'subtitle': series.name_en,
+			'buttons': [ m.edit_button('comic_series', series) ]
+		}) }}
+	  	<div class="panel-body">
+	  	    {% if series.publisher or series.description %}
+    			<div class="mb-3">
+        			{% if series.publisher %}
+        	  			<p><b>Издательство:</b> <a href="{{ series.publisher.website }}">{{ series.publisher.name }}</a></p>
+        			{% endif %}
+        			{% if series.description %}
+        	  			<p>{{ series.description|raw }}</p>
+        			{% endif %}
+    			</div>
+    		{% endif %}
+    		
+		    {% include 'components/comics.twig' with { 'comics': comics, 'no_subtitle': true } %}
+	    </div>
+		{% if series.tags %}
+			<div class="panel-footer">
+                {% include 'components/tags.twig' with { 'tags': series.tags } %}
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

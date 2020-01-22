@@ -1,2 +1,5 @@
 # dacomics
-DAComics.ru web site
+
+http://dacomics.ru
+
+**DAComics.ru** web site built on Plasticode.

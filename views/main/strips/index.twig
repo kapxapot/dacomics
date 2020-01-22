@@ -1,0 +1,13 @@
+{% extends 'main/layout.twig' %}
+
+{% import 'main/local_macros.twig' as lm %}
+
+{% block content %}
+	<div class="panel panel-primary">
+		{{ lm.panel_header(_context, title) }}
+	  	<div class="panel-body">
+			{% include 'components/flex_images.twig' with { 'images': strips, 'no_labels': true } %}
+			{% include 'components/paging.twig' with { 'paging': paging, 'style': 'paging__gallery' } %}
+	    </div>
+	</div>
+{% endblock %}

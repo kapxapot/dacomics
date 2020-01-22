@@ -1,0 +1,25 @@
+{% import 'macros.twig' as gm %}
+
+<div class="mb-2">
+    {% if not no_read %}
+        <a href="{{ comic.page_url }}" class="btn btn-lg btn-default mr-1">
+    	    {{ gm.gi('search') }} Читать
+        </a>
+    {% endif %}
+    {% if comic.download_link %}
+        <a href="{{ comic.download_link }}" class="btn btn-lg btn-default mr-1">
+    	    {{ gm.gi('save') }} Скачать
+        </a>
+    {% endif %}
+    {% if comic.download_original_link %}
+        <a href="{{ comic.download_original_link }}" class="btn btn-lg btn-default">
+    	    {{ gm.gi('save') }} Скачать оригинал
+        </a>
+    {% endif %}
+    {#% if comic.buy_link %}
+        <a href="{{ comic.buy_link }}" class="btn btn-default btn-lg">
+    	    {{ gm.gi('usd', 'Купить') }}
+    	    <span class="hidden-xs">Купить</span>
+        </a>
+    {% endif %#}
+</div>

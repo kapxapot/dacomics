@@ -1,0 +1,45 @@
+{% extends 'main/layout.twig' %}
+
+{% import 'macros.twig' as gm %}
+{% import 'main/macros.twig' as m %}
+{% import 'main/local_macros.twig' as lm %}
+
+{% block content %}
+	<div class="panel panel-primary comic">
+		{% set breadcrumbs = [
+			{ 'url': path_for('main.comics.series', { 'alias': series.alias }), 'text': series.name_ru }
+		] %}
+		{{ lm.panel_header(_context, series.name_ru ~ ' ' ~ comic.number_str, {
+			'subtitle': series.name_en ?? comic.name_en,
+			'bc_title': comic.number_str,
+			'buttons': [ m.edit_button('comic_issues', comic, { 'id': series.id }) ]
+		}) }}
+	  	<div class="panel-body">
+			{% if comic.description %}
+			    <div class="mb-2">
+	  			    {{ comic.description|raw }}
+			    </div>
+			{% endif %}
+      	    {% include 'main/comics/comic_download.twig' with { 'comic': comic, 'no_read': true } %}
+  	        {% include 'main/comics/comic_info.twig' %}
+			{% include 'components/comics_pages.twig' %}
+		</div>
+	    {% include 'main/comics/comic_footer.twig' %}
+	</div>
+  	<div class="pagination-flex">
+		{% if comic.prev %}
+			<a href="{{ comic.prev.page_url }}" title="Назад: {{ series.name_ru }} {{ comic.prev.number_str }}" class="btn btn-default btn-lg">
+				{{ gm.gi('chevron-left') }}
+				<span class="hidden-xs">{{ series.name_ru }} {{ comic.prev.number_str }}</span>
+				<span class="visible-xs-inline">#{{ comic.prev.number }}</span>
+			</a>
+		{% endif %}
+		{% if comic.next %}
+			<a href="{{ comic.next.page_url }}" title="Вперед: {{ series.name_ru }} {{ comic.next.number_str }}" class="btn btn-default btn-lg">
+				<span class="hidden-xs">{{ series.name_ru }} {{ comic.next.number_str }}</span>
+				<span class="visible-xs-inline">#{{ comic.next.number }}</span>
+				{{ gm.gi('chevron-right') }}
+			</a>
+		{% endif %}
+	</div>
+{% endblock %}

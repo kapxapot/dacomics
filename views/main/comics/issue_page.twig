@@ -1,0 +1,42 @@
+{% extends 'main/layout.twig' %}
+
+{% import 'macros.twig' as gm %}
+{% import 'main/macros.twig' as m %}
+{% import 'main/local_macros.twig' as lm %}
+
+{% block content %}
+	<div class="panel panel-primary">
+		{% set breadcrumbs = [
+			{ 'url': path_for('main.comics.series', { 'alias': series.alias }), 'text': series.name_ru },
+	  		{ 'url': path_for('main.comics.issue', { 'alias': series.alias, 'number': comic.number }), 'text': comic.number_str }
+		] %}
+		{{ lm.panel_header(_context, series.name_ru ~ ' ' ~ comic.number_str, {
+			'subtitle': series.name_en ?? comic.name_en,
+			'bc_title': page.number_str,
+			'buttons': [ m.edit_button('comic_pages', page, { 'id': comic.id }) ]
+		}) }}
+	  	<div class="panel-body gallery-picture">
+	  		<div>
+	  			{% if page.next %}<a href="{{ page.next.page_url }}" title="Вперед: Выпуск {{ page.next.comic_number_str }}, Страница {{ page.next.number_str }}">{% endif %}
+	  				<img src="{{ page.url }}" class="center img-responsive" />
+	  			{% if page.next %}</a>{% endif %}
+	  		</div>
+	   	</div>
+	</div>
+  	<div class="gallery-picture-nav pagination-flex">
+		{% if page.prev %}
+			<a href="{{ page.prev.page_url }}" title="Назад: {{ series.name_ru }} {{ page.prev.comic_number_str }}, Страница {{ page.prev.number_str }}" class="btn btn-default btn-lg">
+				{{ gm.gi('chevron-left') }}
+				<span class="hidden-md hidden-lg">#{{ page.prev.comic.number }}-{{ page.prev.number_str }}</span>
+				<span class="hidden-xs hidden-sm">{{ series.name_ru }} {{ page.prev.comic_number_str }}, Страница {{ page.prev.number_str }}</span>
+			</a>
+		{% endif %}
+		{% if page.next %}
+			<a href="{{ page.next.page_url }}" title="Вперед: {{ series.name_ru }} {{ page.next.comic_number_str }}, Страница {{ page.next.number_str }}" class="btn btn-default btn-lg">
+				<span class="hidden-md hidden-lg">#{{ page.next.comic.number }}-{{ page.next.number_str }}</span>
+				<span class="hidden-xs hidden-sm">{{ series.name_ru }} {{ page.next.comic_number_str }}, Страница {{ page.next.number_str }}</span>
+				{{ gm.gi('chevron-right') }}
+			</a>
+		{% endif %}
+	</div>
+{% endblock %}

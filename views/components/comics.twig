@@ -1,0 +1,49 @@
+{% for c in comics %}
+    <div class="comic-card flex{% if feed %} comic-card--feed{% endif %}">
+		<a href="{{ c.page_url }}" class="comic-card__image-link mr-3">
+			<img src="{{ c.img_url ?? c.cover_url }}" class="comic-card__image{% if feed %} comic-card__image--feed{% endif %}" />
+		</a>
+    	<div>
+    	    {% if not feed %}
+        		{% set final_title = c.title ?? c.name_ru %}
+        		<div class="comic-card__title">
+        		    <a href="{{ c.page_url }}">{{ final_title|raw }}</a>
+        		</div>
+        		
+        		{% if not no_subtitle and c.type %}
+                    <div class="comic-card__subtitle">
+                        {% if c.type == 'series' %}
+                            Серия
+                        {% elseif c.type == 'standalone' %}
+                            Одиночный комикс
+                        {% elseif c.type == 'issue' %}
+                            Выпуск
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endif %}
+            
+    		{% set final_description = c.sub_description ?? c.description %}
+            {% if final_description %}
+                <div class="comic-card__description mt-2{% if feed %} mr-2{% endif %}">
+                    {{ final_description|raw }}
+                </div>
+            {% endif %}
+            
+            {% if c.comics|length > 0 %}
+                <div class="mt-3">
+                    <div class="comic-card__issues-title">Выпуски:</div>
+                    {% for issue in c.comics %}
+                        <a href="{{ issue.page_url }}" class="btn btn-lg btn-default mr-1">{{ issue.number }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% if c.type != 'series' %}
+                <div class="comic-card__buttons{% if feed %} comic-card__buttons--feed{% endif %}">
+              	    {% include 'main/comics/comic_download.twig' with { 'comic': c } %}
+                </div>
+            {% endif %}
+    	</div>
+    </div>
+{% endfor %}

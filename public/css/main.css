@@ -1,0 +1,84 @@
+.sidebar-buttons {
+    align-items: center;
+    margin: -0.25rem;
+}
+
+.sidebar-buttons * {
+    margin: 0.25rem;
+}
+
+.comic-card {
+    margin-bottom: 2rem;
+}
+
+.comic-card:last-child {
+    margin-bottom: 0.5rem;
+}
+
+#news-index .comic-card {
+    margin-bottom: 0;
+}
+
+.comic-card__image {
+	box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.5);
+}
+
+.comic-card__image--feed {
+	box-shadow: none;
+}
+
+.comic-card__title {
+    font-size: 200%;
+}
+
+.comic-card__subtitle {
+    color: #999;
+}
+
+.comic-card__issues-title {
+    color: #999;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+}
+
+.comic-card__buttons {
+    margin-top: 2rem;
+}
+
+@media (max-width: 767px) {
+    .comic-card {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 5rem;
+        flex-direction: column;
+    }
+
+    .comic-card--feed {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+    .comic-card:last-child {
+        margin-bottom: 0.5rem;
+    }
+    
+    .comic-card__image-link {
+        margin: 0 auto;
+    }
+    
+    .comic-card__title {
+        margin-top: 2rem;
+    }
+    
+    .comic-card__buttons {
+        text-align: center;
+    }
+    
+    .comic-card__buttons--feed {
+        margin-top: 1rem;
+    }
+}
+
+.social-links a:hover {
+    color: #f66;
+}

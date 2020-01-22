@@ -1,0 +1,51 @@
+site_name: DAComics.ru
+site_bare_url: dacomics.ru	
+site_url: 'http://dacomics.ru'
+cool_site_url: '//dacomics.ru'
+site_description: 'Комиксы и стрипы по играм. Dragon Age, Deus Ex, World of Warcraft, Diablo, Uncharted и другие!'
+short_site_description: 'Комиксы по Dragon Age, Deus Ex, World of Warcraft'
+twitter_card_image: '//dacomics.ru/images/da_logo2.png'
+contact_email: team[собака]dacomics.ru
+copyright_from: 2010
+admin_copyright_from: 2018
+site_keywords: dacomics, dacomics.ru, comic, comics, комикс, комиксы, strips, стрипы, dragon age, da, deus ex, de, world of warcraft, wow, diablo, uncharted, rage, army of two
+admin_url: /admin
+lang: ru
+
+# folders for Twig only
+folders:
+  global: {PLASTICODE_PUBLIC_PATH}
+  local: {SITE_PUBLIC_PATH}
+
+mde: true
+with_colorbox: true
+
+vk_widget:
+  group_id: 30521271
+  #with_chat: true
+
+disqus_alias: dacomics
+twitter_alias: dacomics
+google_analytics_id: UA-1465426-3
+
+angular:
+  app: daApp
+  ctrl: daCtrl
+
+admin_menu:
+  - news
+  - comic_series
+  - comic_standalones
+  - strips
+  - links
+  - group:
+      title: Сайт
+      items:
+        - users
+        - roles
+        - menus
+  - group:
+      title: Справочники
+      items:
+        - games
+        - comic_publishers

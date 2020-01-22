@@ -1,0 +1,731 @@
+comic_issues:
+
+  name_gen: выпуска
+  name_accus: выпуск
+  title: Выпуски
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    number:
+      name: Номер
+      type: number
+      attributes: [ nullable ]
+      template: >
+        '<a href="' + row.page_url + '">' + row.number + '</a>'
+      tooltip: Оставьте пустым для автозаполнения.
+
+    name_ru:
+      name: Название
+      attributes: [ nullable ]
+      template: >
+        row.name_ru ? '<a href="' + row.page_url + '">' + row.name_ru + '</a>' : ''
+
+    name_en:
+      name: Eng. Title
+      form_name: Английское название
+      attributes: [ nullable, hidden ]
+
+    description:
+      name: Описание
+      type: html
+      attributes: [ nullable, hidden ]
+
+    translators:
+      name: Переводчики
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    designers:
+      name: Оформители
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    origin:
+      name: Источник
+      type: url
+      attributes: [ nullable, hidden ]
+
+    issued_on:
+      name: Дата выхода
+      type: date
+      attributes: [ hidden ]
+
+    download_link:
+      name: Файл
+      attributes: [ nullable, hidden ]
+      #prefix: http://dacomics.ru
+
+    download_original_link:
+      name: Файл оригинала
+      attributes: [ nullable, hidden ]
+      #prefix: http://dacomics.ru
+    
+    buy_link:
+      name: Где купить
+      attributes: [ nullable, hidden ]
+
+    tags:
+      name: Теги
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    published:
+      name: Опубликован
+      form_name: Опубликовать
+      type: bool
+      access: publish
+
+    published_at:
+      name: Дата публикации
+      type: datetime-local
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Оставьте пустой для автозаполнения.
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+    comic_pages:
+      name: Страницы
+      template: >
+        '<a href="comic_issues/' + row.id + '/comic_pages" class="btn btn-success btn-pad mr-1"><i class="glyphicon glyphicon-picture" title="Редактировать страницы"></i></a> <button type="button" data-id="' + row.id + '" data-action="upload" class="btn btn-success btn-pad"><i class="glyphicon glyphicon-open" title="Загрузить страницы"></i></button>'
+      attributes: [ no_sort, readonly ]
+
+
+comic_pages:
+
+  name_gen: страницы
+  name_accus: страницу
+  title: Страницы
+  
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    pic:
+      name: Картинка
+      template: >
+        '<a href="' + row.page_url + '"><img src="' + row.thumb + '" height="120"></a>'
+      attributes: [ no_sort, readonly ]
+
+    number:
+      name: Номер
+      type: number
+      attributes: [ nullable ]
+      tooltip: Оставьте пустым для автозаполнения.
+
+    picture:
+      name: Картинка
+      type: thumb
+      #tooltip: Выберите картинку и настройте ее миниатюру.
+      attributes: [ hidden ]
+
+    published:
+      name: Опубликована
+      form_name: Опубликовать
+      type: bool
+      access: publish
+      default: 1
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+  
+
+comic_publishers:
+
+  name_gen: издательства
+  name_accus: издательства
+  title: Издательства
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    name:
+      name: Название
+
+    website:
+      name: Веб-сайт
+      type: url
+      attributes: [ nullable, hidden ]
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+comic_series:
+
+  name_gen: серии
+  name_accus: серию
+  title: Серии
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    game_id:
+      name: Игра
+      entity: games
+
+    name_ru:
+      name: Название
+      template: >
+        '<a href="' + row.page_url + '">' + row.name_ru + '</a>'
+
+    name_en:
+      name: Eng. Title
+      form_name: Английское название
+      attributes: [ hidden ]
+
+    alias:
+      name: Алиас
+      attributes: [ hidden ]
+      prefix: '//dacomics.ru/comics/series/'
+
+    publisher_id:
+      name: Издательство
+      entity: comic_publishers
+      attributes: [ hidden ]
+
+    description:
+      name: Описание
+      type: html
+      attributes: [ nullable, hidden ]
+
+    tags:
+      name: Теги
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    published:
+      name: Опубликована
+      form_name: Опубликовать
+      type: bool
+      access: publish
+
+    published_at:
+      name: Дата публикации
+      type: datetime-local
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Оставьте пустой для автозаполнения.
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+    comic_issues:
+      name: Выпуски
+      template: >
+        '<a href="comic_series/' + row.id + '/comic_issues"><button type="button" class="btn btn-success btn-pad"><span class="glyphicon glyphicon-book" title="Редактировать комиксы"></span></button></a>'
+      attributes: [ no_sort, readonly ]
+
+
+comic_standalones:
+
+  name_gen: комикса
+  name_accus: комикс
+  title: Комиксы
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    name_ru:
+      name: Название
+      template: >
+        '<a href="' + row.page_url + '">' + row.name_ru + '</a>'
+
+    name_en:
+      name: Eng. Title
+      form_name: Английское название
+      attributes: [ hidden ]
+
+    game_id:
+      name: Игра
+      entity: games
+
+    alias:
+      name: Алиас
+      attributes: [ hidden ]
+      prefix: '//dacomics.ru/comics/'
+
+    publisher_id:
+      name: Издательство
+      entity: comic_publishers
+      attributes: [ hidden ]
+
+    description:
+      name: Описание
+      type: html
+      attributes: [ nullable, hidden ]
+
+    translators:
+      name: Переводчики
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    designers:
+      name: Оформители
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    origin:
+      name: Источник
+      type: url
+      attributes: [ nullable, hidden ]
+
+    issued_on:
+      name: Дата выхода
+      type: date
+      attributes: [ hidden ]
+
+    download_link:
+      name: Файл
+      attributes: [ nullable, hidden ]
+      #prefix: http://dacomics.ru
+
+    download_original_link:
+      name: Файл оригинала
+      attributes: [ nullable, hidden ]
+      #prefix: http://dacomics.ru
+
+    buy_link:
+      name: Где купить
+      attributes: [ nullable, hidden ]
+
+    tags:
+      name: Теги
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    published:
+      name: Опубликован
+      form_name: Опубликовать
+      type: bool
+      access: publish
+      default: 1
+
+    published_at:
+      name: Дата публикации
+      type: datetime-local
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Оставьте пустой для автозаполнения.
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+    comic_standalone_pages:
+      name: Страницы
+      template: >
+        '<a href="comic_standalones/' + row.id + '/comic_standalone_pages"><button type="button" class="btn btn-success btn-pad mr-1"><span class="glyphicon glyphicon-picture" title="Редактировать страницы"></span></button></a> <button type="button" data-id="' + row.id + '" data-action="upload" class="btn btn-success btn-pad"><i class="glyphicon glyphicon-open" title="Загрузить страницы"></i></button>'
+      attributes: [ no_sort, readonly ]
+
+
+comic_standalone_pages:
+
+  name_gen: страницы
+  name_accus: страницу
+  title: Страницы
+  
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    pic:
+      name: Картинка
+      template: >
+        '<a href="' + row.page_url + '"><img src="' + row.thumb + '" height="120"></a>'
+      attributes: [ no_sort, readonly ]
+
+    number:
+      name: Номер
+      type: number
+      attributes: [ nullable ]
+      tooltip: Оставьте пустым для автозаполнения.
+
+    picture:
+      name: Картинка
+      type: thumb
+      #tooltip: Выберите картинку и настройте ее миниатюру.
+      attributes: [ hidden ]
+
+    published:
+      name: Опубликована
+      form_name: Опубликовать
+      type: bool
+      access: publish
+      default: 1
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+games:
+
+  name_gen: игры
+  name_accus: игру
+  title: Игры
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    name:
+      name: Название
+      template: >
+        '<a href="/' + row.alias + '">' + row.name + '</a>'
+
+    alias:
+      name: Алиас
+      prefix: '//dacomics.ru/'
+      attributes: [ nullable ]
+
+    autotags:
+      name: Автотеги
+      attributes: [ nullable, hidden ]
+
+    published:
+      name: Опубликована
+      form_name: Опубликовать
+      type: bool
+      access: publish
+
+
+links:
+
+  name_gen: ссылки
+  name_accus: ссылку
+  title: Ссылки
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    pic:
+      name: Кнопка
+      template: >
+        row.image_url ? '<img src="' + row.image_url + '">' : ''
+      attributes: [ no_sort, readonly ]
+
+    url:
+      name: Адрес
+      type: url
+      template: >
+        '<a href="' + row.url + '">' + row.url + '</a>'
+
+    image_url:
+      name: Кнопка
+      type: url
+      attributes: [ nullable, hidden ]
+
+    description:
+      name: Описание
+      attributes: [ nullable, hidden ]
+
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+menus:
+
+  name_gen: меню
+  name_accus: меню
+  title: Меню
+
+  delete_extra_message: " ' + i.text + ' (со всеми элементами)' + '"
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    link:
+      name: Ссылка
+      type: site_url
+      template: >
+        '<a href="' + row.link + '">' + row.text + '</a>'
+
+    text:
+      name: Текст
+      attributes: [ hidden ]
+
+    position:
+      name: Позиция
+      type: number
+      default: 1
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+    menu_items:
+      name: Подменю
+      template: >
+        '<a href="menus/' + row.id + '/menu_items"><button type="button" class="btn btn-success btn-pad"><span class="glyphicon glyphicon-align-justify" title="Редактировать элементы меню"></span></button></a>'
+      attributes: [ no_sort, readonly ]
+
+
+menu_items:
+
+  name_gen: элемента меню
+  name_accus: элемент меню
+  title: Элементы меню
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+    
+    link:
+      name: Ссылка
+      type: site_url
+      template: >
+        '<a href="' + row.link + '">' + row.text + '</a>'
+
+    text:
+      name: Текст
+      attributes: [ hidden ]
+
+    position:
+      name: Позиция
+      type: number
+      default: 1
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+news:
+
+  name_gen: новости
+  name_accus: новость
+  title: Новости
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    title:
+      name: Заголовок
+      template: >
+        '<a href="http://dacomics.ru/news/' + row.id + '">' + row.title + '</a>'
+
+    game_id:
+      name: Игра
+      entity: games
+      attributes: [ nullable ]
+
+    text:
+      name: Текст
+      type: html
+      attributes: [ hidden ]
+
+    tags:
+      name: Теги
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+
+    published:
+      name: Опубликована
+      form_name: Опубликовать
+      type: bool
+      access: publish
+
+    published_at:
+      name: Дата публикации
+      type: datetime-local
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Оставьте пустой для автозаполнения.
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+    
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+roles:
+
+  name_gen: роли
+  name_accus: роль
+  title: Роли
+  
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+    
+    name:
+      name: Название
+
+    tag:
+      name: Тег
+
+
+strips:
+
+  name_gen: стрипа
+  name_accus: стрип
+  title: Стрипы
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    pic:
+      name: Картинка
+      template: >
+        '<a href="' + row.picture + '"><img src="' + row.thumb + '" height="80"></a>'
+      attributes: [ no_sort, readonly ]
+
+    game_id:
+      name: Игра
+      entity: games
+      attributes: [ nullable ]
+
+    title:
+      template: >
+        (row.published == 1) ? '<a href="' + row.page_url + '">' + row.title + '</a>' : row.title
+      name: Заголовок
+
+    picture:
+      name: Картинка
+      type: thumb
+      tooltip: Выберите картинку и настройте ее миниатюру.
+      attributes: [ hidden ]
+
+    tags:
+      name: Теги
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Через запятую.
+        
+    published:
+      name: Опубликован
+      form_name: Опубликовать
+      type: bool
+      access: publish
+
+    published_at:
+      name: Дата публикации
+      type: datetime-local
+      attributes: [ nullable, hidden ]
+      access: publish
+      tooltip: Оставьте пустой для автозаполнения.
+
+    created_by_name:
+      name: Автор
+      attributes: [ readonly ]
+
+    created_at:
+      name: Дата создания
+      type: date
+      attributes: [ readonly ]
+
+
+users:
+
+  name_gen: пользователя
+  name_accus: пользователя
+  title: Пользователи
+
+  columns:
+    id:
+      name: id
+      attributes: [ readonly ]
+
+    login:
+      name: Логин
+      template: >
+        row.login + (row.name ? ' (' + row.name + ')' : '')
+
+    name:
+      name: Отображаемое имя
+      attributes: [ nullable, hidden ]
+      tooltip: По умолчанию совпадает с логином.
+
+    email:
+      name: E-mail
+      type: email
+
+    role_id:
+      name: Роль
+      entity: roles
+      default: 3
+
+    password:
+      name: Пароль
+      type: password
+      tooltip: Введите пароль, если хотите его изменить. Иначе оставьте поле пустым.
+      attributes: [ nullable, hidden, readonly, on_form ]
+    
+    created_at:
+      name: Дата регистрации
+      type: date
+      attributes: [ readonly ]
